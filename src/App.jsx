@@ -12,7 +12,12 @@ const App = () => {
   const nextQuestion = () => {
     setcorrectAnswer(correctAnswer + 1);
   };
-  const que = QUESTIONS[0].text;
+  const que = QUESTIONS[correctAnswer].text;
+  const ans1 = QUESTIONS[correctAnswer].answers[0].text;
+  const ans2 = QUESTIONS[correctAnswer].answers[1].text;
+  const ans3 = QUESTIONS[correctAnswer].answers[2].text;
+  const ans4 = QUESTIONS[correctAnswer].answers[3].text;
+
   return (
     <Wrapper>
       <Wrapper>
@@ -21,10 +26,10 @@ const App = () => {
         <QuizButton className="lightBlue">{que}</QuizButton>
       </Wrapper>
       <Wrapper>
-        <QuizButton onclick={nextQuestion}>A</QuizButton>
-        <QuizButton onclick={nextQuestion}>B</QuizButton>
-        <QuizButton onclick={nextQuestion}>C</QuizButton>
-        <QuizButton onclick={nextQuestion}>D</QuizButton>
+        <QuizButton onclick={nextQuestion}>{ans1}</QuizButton>
+        <QuizButton onclick={nextQuestion}>{ans2}</QuizButton>
+        <QuizButton onclick={nextQuestion}>{ans3}</QuizButton>
+        <QuizButton onclick={nextQuestion}>{ans4}</QuizButton>
       </Wrapper>
     </Wrapper>
   );

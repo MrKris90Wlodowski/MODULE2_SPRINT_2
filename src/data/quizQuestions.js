@@ -1,4 +1,5 @@
-// const que = QUESTIONS[0].text
+// const que = QUESTIONS[0].text;
+// const ans = QUESTIONS[0].answers[0];
 const QUESTIONS = [
   {
     text: "Co oznacza skrót MMA?",
