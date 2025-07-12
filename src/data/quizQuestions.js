@@ -1,5 +1,7 @@
 // const que = QUESTIONS[0].text;
-// const ans = QUESTIONS[0].answers[0];
+// const ans = QUESTIONS[0].answers[0].text;
+// const ansVal = QUESTIONS[0].answers[0].isCorrect;
+
 const QUESTIONS = [
   {
     text: "Co oznacza skrót MMA?",

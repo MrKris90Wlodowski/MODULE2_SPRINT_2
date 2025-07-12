@@ -1,6 +1,6 @@
-const QuizButton = ({className, isCorrect, onclick, children}) => {
+const QuizButton = ({className, value, onClick, children}) => {
     return (
-        <button className={className} isTrue={isCorrect} onClick={onclick}>{children}</button>
+        <button className={className} onClick={() => {onClick(value)}}>{children}</button>
     )
 }
 

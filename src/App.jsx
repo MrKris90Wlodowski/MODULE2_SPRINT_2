@@ -5,66 +5,44 @@ import Wrapper from "./components/Wrapper";
 import QUESTIONS from "./data/quizQuestions";
 
 const App = () => {
-  const [correctAnswer, setcorrectAnswer] = useState(0);
-  console.log(QUESTIONS.length);
-  console.log(QUESTIONS[correctAnswer]);
+  const [nextAnswer, setNextAnswer] = useState(0);
+  const [correctAnswer, setCorrectAnswer] = useState(0);
 
-  const nextQuestion = () => {
-    setcorrectAnswer(correctAnswer + 1);
+  console.log(QUESTIONS.length);
+  console.log(QUESTIONS[nextAnswer]);
+  const hideElement = () => {};
+  const nextQuestion = (value) => {
+    setNextAnswer(nextAnswer + 1);
+    if (value === true) {
+      setCorrectAnswer(correctAnswer + 1)
+    }
   };
-  const que = QUESTIONS[correctAnswer].text;
-  const ans1 = QUESTIONS[correctAnswer].answers[0].text;
-  const ans2 = QUESTIONS[correctAnswer].answers[1].text;
-  const ans3 = QUESTIONS[correctAnswer].answers[2].text;
-  const ans4 = QUESTIONS[correctAnswer].answers[3].text;
+  const question = QUESTIONS[nextAnswer].text;
+  const answer1 = QUESTIONS[nextAnswer].answers[0].text;
+  const answerValue1 = QUESTIONS[nextAnswer].answers[0].isCorrect;
+  const answer2 = QUESTIONS[nextAnswer].answers[1].text;
+  const answerValue2 = QUESTIONS[nextAnswer].answers[1].isCorrect;
+  const answer3 = QUESTIONS[nextAnswer].answers[2].text;
+  const answerValue3 = QUESTIONS[nextAnswer].answers[2].isCorrect;
+  const answer4 = QUESTIONS[nextAnswer].answers[3].text;
+  const answerValue4 = QUESTIONS[nextAnswer].answers[3].isCorrect;
 
   return (
     <Wrapper>
       <Wrapper>
         <h1>QUIZ MMA</h1>
-        <QuizButton className="lightBlue">Rozpocznij Quiz</QuizButton>
-        <QuizButton className="lightBlue">{que}</QuizButton>
+        <QuizButton className="lightBlue" onClick={hideElement}>Rozpocznij Quiz</QuizButton>
+        <QuizButton className="lightBlue">{question}</QuizButton>
       </Wrapper>
       <Wrapper>
-        <QuizButton onclick={nextQuestion}>{ans1}</QuizButton>
-        <QuizButton onclick={nextQuestion}>{ans2}</QuizButton>
-        <QuizButton onclick={nextQuestion}>{ans3}</QuizButton>
-        <QuizButton onclick={nextQuestion}>{ans4}</QuizButton>
+        <QuizButton onClick={nextQuestion} value={answerValue1}>{answer1}</QuizButton>
+        <QuizButton onClick={nextQuestion} value={answerValue2}>{answer2}</QuizButton>
+        <QuizButton onClick={nextQuestion} value={answerValue3}>{answer3}</QuizButton>
+        <QuizButton onClick={nextQuestion} value={answerValue4}>{answer4}</QuizButton>
+        <h1>CORRECT {correctAnswer}</h1>
       </Wrapper>
     </Wrapper>
   );
 };
-
-// function App() {
-//   const [count, setCount] = useState(0)
-
-//   return (
-//     <>
-//       <div>
-//         <a href="https://vite.dev" target="_blank">
-//           <img src={viteLogo} className="logo" alt="Vite logo" />
-//         </a>
-//         <a href="https://react.dev" target="_blank">
-//           <img src={reactLogo} className="logo react" alt="React logo" />
-//         </a>
-//       </div>
-//       <h1>Vite + React</h1>
-//       <div className="card">
-//         <button onClick={() => setCount((count) => count + 1)}>
-//           count is {count}
-//         </button>
-//         <p>
-//           Edit <code>src/App.jsx</code> and save to test HMR
-//         </p>
-//       </div>
-//       <p className="read-the-docs">
-//         Click on the Vite and React logos to learn more
-//       </p>
-//       <Wrapper>
-//         <p>HI I AM <KRIS></KRIS></p>
-//       </Wrapper>
-//     </>
-//   )
-// }
 
 export default App;
