@@ -38,6 +38,11 @@ h1 {
   line-height: 1.1;
 }
 
+p {
+  font-size: 1rem;
+    font-weight: 900;
+}
+
 button {
   border-radius: 0.6rem;
   border: 2px solid black;
@@ -51,22 +56,19 @@ button {
   transition: ease-in-out 1s;
 }
 button:hover {
-  background-color: #0000ff;
+  background-color: #aeaefd;
 }
 
 .lightBlue {
-  background-color: #0000ff;
+  background-color: #aeaefd;
 }
-/* button:focus,
-button:focus-visible {
-  outline: 4px auto -webkit-focus-ring-color;
-} */
+
 
 .flexStyle {
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 2rem;
+  gap: 1rem;
 }
 
 .hideElement {
