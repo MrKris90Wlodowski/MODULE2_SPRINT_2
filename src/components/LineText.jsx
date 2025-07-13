@@ -1,6 +1,6 @@
-const LineText = ({children}) => {
+const LineText = ({className, children}) => {
     return (
-        <p>{children}</p>
+        <p className={className}>{children}</p>
     )
 }
 

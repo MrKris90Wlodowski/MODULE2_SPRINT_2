@@ -1,9 +1,9 @@
 import { useState } from "react";
-// import "./index.css";
 import QuizButton from "./components/QuizButton";
 import Wrapper from "./components/Wrapper";
 import QUESTIONS from "./data/quizQuestions";
 import LineText from "./components/LineText";
+import SpanText from "./components/SpanText";
 
 const App = () => {
   const [nextAnswer, setNextAnswer] = useState(0);
@@ -12,6 +12,7 @@ const App = () => {
   const [quizStage, setQuizStage] = useState(false);
   const [resultStage, setResultStage] = useState(false);
   const [userAnswer, setUserAnswer] = useState([]);
+  const [isPassQuiz, setIsPassQuiz] = useState(false);
 
   console.log(QUESTIONS.length);
   console.log(nextAnswer);
@@ -27,7 +28,7 @@ const App = () => {
   };
   const nextQuestion = (value) => {
     const newAnswerIndex = nextAnswer + 1;
-    // setNextAnswer(newAnswerIndex + 1);
+    // const sumCorrectAnswer = correctAnswer + 1
     if (value === true) {
       setCorrectAnswer(correctAnswer + 1);
     }
@@ -36,6 +37,9 @@ const App = () => {
       setResultStage(true);
     } else {
       setNextAnswer(newAnswerIndex);
+    }
+    if (correctAnswer >= 8) {
+      setIsPassQuiz(true);
     }
   };
 
@@ -48,6 +52,7 @@ const App = () => {
   const answerValue3 = QUESTIONS[nextAnswer].answers[2].isCorrect;
   const answer4 = QUESTIONS[nextAnswer].answers[3].text;
   const answerValue4 = QUESTIONS[nextAnswer].answers[3].isCorrect;
+  const percentCorrect = (correctAnswer * 10).toFixed(2);
 
   return (
     <Wrapper>
@@ -111,14 +116,30 @@ const App = () => {
       )}
       {resultStage && (
         <Wrapper>
-          {userAnswer.map((quest, index) => (
-            <div>
-              <LineText>
-                Pytanie {index + 1}: {quest.textQue}
-              </LineText>
-              {<LineText>Pytanie Twoja odpowiedź: {quest.textAns}</LineText>}
-            </div>
-          ))}
+          <LineText className={`bigFontSize ${isPassQuiz ? "hardGreen" : "hardRed"}`}>{isPassQuiz ? "Gratulacje! quiz zaliczony!" : "Niestety, quiz niezaliczony"}</LineText>
+          <LineText className={`mediumFontSize ${isPassQuiz ? "hardGreen" : "hardRed"}`}>
+            Twój wynik to {percentCorrect}% ({correctAnswer} z 10 poprawnych odpowiedzi)
+          </LineText>
+          <Wrapper className="flexStyleLeftSide">
+            {userAnswer.map((quest, index) => (
+              <Wrapper key={index} className="flexStyleLeftSide">
+                <LineText>
+                  Pytanie {index + 1}: {quest.textQue}
+                </LineText>
+                {
+                  <LineText>
+                    Twoja odpowiedź:{" "}
+                    <SpanText
+                      className={quest.isCorrect ? "hardGreen" : "hardRed"}
+                    >
+                      {quest.textAns}
+                    </SpanText>
+                  </LineText>
+                }
+              </Wrapper>
+            ))}
+          </Wrapper>
+          <QuizButton className="green">Powrót do startu</QuizButton>
         </Wrapper>
       )}
     </Wrapper>

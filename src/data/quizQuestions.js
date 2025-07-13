@@ -78,11 +78,11 @@ const QUESTIONS = [
     text: "Czym było PRIDE FC?",
     answers: [
       {
-        text: "Japońską federacją MMA, znaną z walk w ringu i braku zakazu uderzeń nogą w głowę leżącego",
+        text: "Japońską federacją MMA, znaną z walk w białym ringu",
         isCorrect: true,
       },
       {
-        text: "Organizacją promującą boks tajski w Azji Południowo-Wschodniej",
+        text: "Organizacją promującą boks tajski w Azji",
         isCorrect: false,
       },
       {
@@ -90,7 +90,7 @@ const QUESTIONS = [
         isCorrect: false,
       },
       {
-        text: "Amerykańskim programem reality-show o tematyce sportów walki",
+        text: "Nadawanym w USA reality-show o tematyce sportów walki",
         isCorrect: false,
       },
     ],

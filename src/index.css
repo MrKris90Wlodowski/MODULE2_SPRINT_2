@@ -28,9 +28,9 @@ body {
   display: grid;
   place-items: center;
   gap: 2rem;
-  /* justify-content: center; */
   min-width: 320px;
   min-height: 100vh;
+  padding: 2rem 2rem;
 }
 
 h1 {
@@ -55,7 +55,7 @@ button {
   cursor: pointer;
   transition: ease-in-out 1s;
 }
-button:hover {
+.active:hover:hover {
   background-color: #aeaefd;
 }
 
@@ -63,6 +63,25 @@ button:hover {
   background-color: #aeaefd;
 }
 
+.bigFontSize {
+  font-size: 3rem;
+}
+
+.mediumFontSize {
+  font-size: 2rem;
+}
+
+.green {
+  background-color: #4bda4b;
+}
+
+.hardGreen {
+  color: #006600;
+}
+
+.hardRed {
+  color: #9e0000;
+}
 
 .flexStyle {
   display: flex;
@@ -71,8 +90,12 @@ button:hover {
   gap: 1rem;
 }
 
-.hideElement {
-  display: none;
+.flexStyleLeftSide {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+  /* gap: 1rem; */
 }
 
 @media (prefers-color-scheme: light) {
