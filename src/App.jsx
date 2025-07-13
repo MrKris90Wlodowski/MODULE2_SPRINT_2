@@ -14,6 +14,14 @@ const App = () => {
   const [userAnswer, setUserAnswer] = useState([]);
   const [isPassQuiz, setIsPassQuiz] = useState(false);
 
+  const playAgain = () => {
+    setQuizStage(false);
+    setResultStage(false);
+    setIntroStage(true);
+    setNextAnswer(0);
+    setCorrectAnswer(0)
+    setUserAnswer([])
+  }
   console.log(QUESTIONS.length);
   console.log(nextAnswer);
   const hideElement = () => {
@@ -28,7 +36,7 @@ const App = () => {
   };
   const nextQuestion = (value) => {
     const newAnswerIndex = nextAnswer + 1;
-    // const sumCorrectAnswer = correctAnswer + 1
+    const sumCorrectAnswer = value === true ? correctAnswer + 1 : correctAnswer;
     if (value === true) {
       setCorrectAnswer(correctAnswer + 1);
     }
@@ -38,9 +46,9 @@ const App = () => {
     } else {
       setNextAnswer(newAnswerIndex);
     }
-    if (correctAnswer >= 8) {
+    if (sumCorrectAnswer >= 8) {
       setIsPassQuiz(true);
-    }
+    } 
   };
 
   const question = QUESTIONS[nextAnswer].text;
@@ -139,7 +147,7 @@ const App = () => {
               </Wrapper>
             ))}
           </Wrapper>
-          <QuizButton className="green">Powrót do startu</QuizButton>
+          <QuizButton className="green" onClick={() => {playAgain()}}>Powrót do startu</QuizButton>
         </Wrapper>
       )}
     </Wrapper>
