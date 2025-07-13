@@ -1,6 +1,6 @@
-const QuizButton = ({className, value, onClick, children}) => {
+const QuizButton = ({className, value, textAns, textQue, onClick, children}) => {
     return (
-        <button className={className} onClick={() => onClick(value)}>{children}</button>
+        <button className={className} onClick={() => onClick(value, textAns, textQue)}>{children}</button>
     )
 }
 

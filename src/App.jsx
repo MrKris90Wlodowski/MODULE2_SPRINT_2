@@ -5,49 +5,40 @@ import Wrapper from "./components/Wrapper";
 import QUESTIONS from "./data/quizQuestions";
 import LineText from "./components/LineText";
 
-
-const answers = [];
-
 const App = () => {
   const [nextAnswer, setNextAnswer] = useState(0);
   const [correctAnswer, setCorrectAnswer] = useState(0);
   const [introStage, setIntroStage] = useState(true);
   const [quizStage, setQuizStage] = useState(false);
   const [resultStage, setResultStage] = useState(false);
+  const [userAnswer, setUserAnswer] = useState([]);
 
   console.log(QUESTIONS.length);
-  // console.log(QUESTIONS[nextAnswer]);
   console.log(nextAnswer);
-  // const answers = [];
   const hideElement = () => {
     setIntroStage(false);
     setQuizStage(true);
   };
+  const handleResultAnswer = (value, answerText, questionText) => {
+    setUserAnswer((prev) => [
+      ...prev,
+      { textQue: questionText, textAns: answerText, isCorrect: value },
+    ]);
+  };
   const nextQuestion = (value) => {
-    const newAnswerIndex = nextAnswer + 1
+    const newAnswerIndex = nextAnswer + 1;
     // setNextAnswer(newAnswerIndex + 1);
     if (value === true) {
       setCorrectAnswer(correctAnswer + 1);
-      answers.push({isCorrect: value})
-    } else {
-      answers.push({isCorrect: value})
     }
-
     if (newAnswerIndex === 10) {
       setQuizStage(false);
-      setResultStage(true)
+      setResultStage(true);
     } else {
       setNextAnswer(newAnswerIndex);
     }
   };
-  // const showresult = () => {
-  //   if (nextAnswer === 10) {
-  //     setQuizStage(false);
-  //     setResultStage(true)
-  //   } else {
-  //     setNextAnswer
-  //   }
-  // }
+
   const question = QUESTIONS[nextAnswer].text;
   const answer1 = QUESTIONS[nextAnswer].answers[0].text;
   const answerValue1 = QUESTIONS[nextAnswer].answers[0].isCorrect;
@@ -58,7 +49,6 @@ const App = () => {
   const answer4 = QUESTIONS[nextAnswer].answers[3].text;
   const answerValue4 = QUESTIONS[nextAnswer].answers[3].isCorrect;
 
-  console.log(answers)
   return (
     <Wrapper>
       {introStage && (
@@ -72,36 +62,65 @@ const App = () => {
       {quizStage && (
         <Wrapper>
           <LineText>{question}</LineText>
-          {/* <QuizButton className="lightBlue">{question}</QuizButton> */}
-          <QuizButton onClick={(value) => {nextQuestion(value)}} value={answerValue1}>
+          <QuizButton
+            onClick={(value, textAns, textQue) => {
+              nextQuestion(value);
+              handleResultAnswer(value, textAns, textQue);
+            }}
+            value={answerValue1}
+            textAns={answer1}
+            textQue={question}
+          >
             {answer1}
           </QuizButton>
-          <QuizButton onClick={(value) => {nextQuestion(value)}} value={answerValue2}>
+          <QuizButton
+            onClick={(value, textAns, textQue) => {
+              nextQuestion(value);
+              handleResultAnswer(value, textAns, textQue);
+            }}
+            value={answerValue2}
+            textAns={answer2}
+            textQue={question}
+          >
             {answer2}
           </QuizButton>
-          <QuizButton onClick={(value) => {nextQuestion(value)}} value={answerValue3}>
+          <QuizButton
+            onClick={(value, textAns, textQue) => {
+              nextQuestion(value);
+              handleResultAnswer(value, textAns, textQue);
+            }}
+            value={answerValue3}
+            textAns={answer3}
+            textQue={question}
+          >
             {answer3}
           </QuizButton>
-          <QuizButton onClick={(value) => {nextQuestion(value)}} value={answerValue4}>
+          <QuizButton
+            onClick={(value, textAns, textQue) => {
+              nextQuestion(value);
+              handleResultAnswer(value, textAns, textQue);
+            }}
+            value={answerValue4}
+            textAns={answer4}
+            textQue={question}
+          >
             {answer4}
           </QuizButton>
           <h1>CORRECT {correctAnswer}</h1>
         </Wrapper>
       )}
-      {resultStage &&
-      <Wrapper>
-        {QUESTIONS.map((quest, index) => (
-          <div>
-            <LineText>
-              Pytanie {index + 1}: {quest.text}
-            </LineText>
-            <LineText>
-              Pytanie Twoja odpowiedź: {index}
-            </LineText>
-          </div>
-        ))}
-      </Wrapper>
-      }
+      {resultStage && (
+        <Wrapper>
+          {userAnswer.map((quest, index) => (
+            <div>
+              <LineText>
+                Pytanie {index + 1}: {quest.textQue}
+              </LineText>
+              {<LineText>Pytanie Twoja odpowiedź: {quest.textAns}</LineText>}
+            </div>
+          ))}
+        </Wrapper>
+      )}
     </Wrapper>
   );
 };
