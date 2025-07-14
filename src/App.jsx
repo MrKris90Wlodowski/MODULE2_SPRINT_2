@@ -8,32 +8,28 @@ import SpanText from "./components/SpanText";
 const App = () => {
   const [nextAnswer, setNextAnswer] = useState(0);
   const [correctAnswer, setCorrectAnswer] = useState(0);
-  const [introStage, setIntroStage] = useState(true);
-  const [quizStage, setQuizStage] = useState(false);
-  const [resultStage, setResultStage] = useState(false);
+  const [stage, setStage] = useState("intro");
   const [userAnswer, setUserAnswer] = useState([]);
   const [isPassQuiz, setIsPassQuiz] = useState(false);
 
-  const playAgain = () => {
-    setQuizStage(false);
-    setResultStage(false);
-    setIntroStage(true);
+  const resetQuiz = () => {
+    setStage("intro");
     setNextAnswer(0);
-    setCorrectAnswer(0)
-    setUserAnswer([])
+    setCorrectAnswer(0);
+    setUserAnswer([]);
   }
-  console.log(QUESTIONS.length);
-  console.log(nextAnswer);
-  const hideElement = () => {
-    setIntroStage(false);
-    setQuizStage(true);
+
+  const startQuiz = () => {
+    setStage("quiz");
   };
+
   const handleResultAnswer = (value, answerText, questionText) => {
     setUserAnswer((prev) => [
       ...prev,
       { textQue: questionText, textAns: answerText, isCorrect: value },
     ]);
   };
+
   const nextQuestion = (value) => {
     const newAnswerIndex = nextAnswer + 1;
     const sumCorrectAnswer = value === true ? correctAnswer + 1 : correctAnswer;
@@ -41,8 +37,9 @@ const App = () => {
       setCorrectAnswer(correctAnswer + 1);
     }
     if (newAnswerIndex === 10) {
-      setQuizStage(false);
-      setResultStage(true);
+      setStage("result")
+      // setQuizStage(false);
+      // setResultStage(true);
     } else {
       setNextAnswer(newAnswerIndex);
     }
@@ -64,15 +61,15 @@ const App = () => {
 
   return (
     <Wrapper>
-      {introStage && (
+      {stage === "intro" && (
         <Wrapper>
-          <h1>QUIZ MMA</h1>
-          <QuizButton className="lightBlue" onClick={hideElement}>
+          <LineText className="bigFontSize">QUIZ MMA</LineText>
+          <QuizButton className="lightBlue" onClick={startQuiz}>
             Rozpocznij Quiz
           </QuizButton>
         </Wrapper>
       )}
-      {quizStage && (
+      {stage === "quiz" && (
         <Wrapper>
           <LineText>{question}</LineText>
           <QuizButton
@@ -119,10 +116,9 @@ const App = () => {
           >
             {answer4}
           </QuizButton>
-          <h1>CORRECT {correctAnswer}</h1>
         </Wrapper>
       )}
-      {resultStage && (
+      {stage === "result" && (
         <Wrapper>
           <LineText className={`bigFontSize ${isPassQuiz ? "hardGreen" : "hardRed"}`}>{isPassQuiz ? "Gratulacje! quiz zaliczony!" : "Niestety, quiz niezaliczony"}</LineText>
           <LineText className={`mediumFontSize ${isPassQuiz ? "hardGreen" : "hardRed"}`}>
@@ -147,7 +143,7 @@ const App = () => {
               </Wrapper>
             ))}
           </Wrapper>
-          <QuizButton className="green" onClick={() => {playAgain()}}>Powrót do startu</QuizButton>
+          <QuizButton className="green" onClick={() => {resetQuiz()}}>Powrót do startu</QuizButton>
         </Wrapper>
       )}
     </Wrapper>
